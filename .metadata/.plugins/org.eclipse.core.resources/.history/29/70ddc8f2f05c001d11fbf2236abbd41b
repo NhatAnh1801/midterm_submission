@@ -1,0 +1,15 @@
+/*
+ * ex22.h
+ *
+ *  Created on: Nov 5, 2022
+ *      Author: ADMIN
+ */
+
+#ifndef INC_EX22_H_
+#define INC_EX22_H_
+
+void fsm_simple_buttons_run () {
+ // TODO
+
+ }
+#endif /* INC_EX22_H_ */

@@ -1,0 +1,66 @@
+/*
+ * fsm_automatic.c
+ *
+ *  Created on: Nov 5, 2022
+ *      Author: ADMIN
+ */
+#include "fsm_automatic.h"
+#include "button.h"
+#include "global.h"
+#include "main.h"
+
+int counter;
+void fsm_simple_buttons_run (){
+	switch(status){
+	case INIT:
+		//TODO
+		status = RESTART ;
+		setTimer(100);
+		break;
+	case RESTART:
+		counter = 0 ;
+		if(RESET_Pressed == 1){
+			status = RESTART;
+		}
+		else if(INC_Pressed == 1){
+			status = INC1;
+		}
+		else if(DEC_Pressed){
+			status = DEC1;
+		}
+		setTimer(100);
+		break;
+
+	case INC1:
+		if(RESET_Pressed == NORMAL_STATE){
+			status = RESTART;
+		}
+		else if(INC_Pressed == NORMAL_STATE) {
+			if(counter == 9 ){
+			counter = 0;
+			}
+			status = INC1;
+		}
+		counter ++;
+		setTimer(100);
+		break;
+	case DEC1:
+		if(DEC_Pressed == NORMAL_STATE){
+			if(counter == 0){
+				counter = 9;
+			}
+			status = DEC1;
+		}
+		else if(INC_Pressed == NORMAL_STATE){
+			status = INC1;
+		}
+		else if(RESET_Pressed == NORMAL_STATE){
+			status = RESTART;
+		}
+		counter --;
+		setTimer(100);
+		break;
+	default:
+		break;
+	}
+}
